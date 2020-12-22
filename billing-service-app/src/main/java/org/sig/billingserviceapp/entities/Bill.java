@@ -1,0 +1,25 @@
+package org.sig.billingserviceapp.entities;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.sig.billingserviceapp.model.Customer;
+
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
+
+@Entity
+@Data @NoArgsConstructor @AllArgsConstructor @ToString
+public class Bill {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Date billingDate;
+    private Long customerID;
+    @OneToMany(mappedBy = "bill")
+    private Collection<ProductItem> productItems;
+    @Transient
+    private Customer customer;
+
+}
